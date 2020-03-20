@@ -65,18 +65,38 @@
         fab:menu_labels_position="left"
         fab:menu_openDirection="up"
         fab:menu_backgroundColor="@android:color/transparent"
-        fab:menu_fab_label="your_label_here"
+        fab:menu_fab_label=""
         android:layout_gravity="end|bottom"
         >
 
+
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_item"
+            android:id="@+id/btnDespesas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_email"
-
+            android:src="@drawable/fab_add"
+            app:fab_colorNormal="#DA4336"
+            fab:menu_colorPressed="#E75043"
             fab:fab_size="mini"
-            fab:fab_label="Menu item 1" />
+            fab:fab_label="Despesas" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/btnReceitas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fab_add"
+            app:fab_colorNormal="@color/blue_btn_color"
+            fab:menu_fab_size="normal"
+            fab:menu_showShadow="true"
+            fab:menu_shadowColor="#66000000"
+            fab:menu_shadowRadius="4dp"
+            fab:menu_shadowXOffset="1dp"
+            fab:menu_shadowYOffset="3dp"
+            fab:menu_colorNormal="#DA4336"
+            fab:menu_colorRipple="#99FFFFFF"
+            fab:menu_animationDelayPerItem="50"
+            fab:fab_size="mini"
+            fab:fab_label="Receitas" />
 
     </com.github.clans.fab.FloatingActionMenu>
 
