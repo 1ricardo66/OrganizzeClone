@@ -72,6 +72,7 @@
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/btnDespesas"
+            android:onClick="addDespesas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/fab_add"
@@ -82,6 +83,7 @@
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/btnReceitas"
+            android:onClick="addReceitas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/fab_add"

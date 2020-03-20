@@ -3,6 +3,19 @@
     <color name="colorPrimary">#00DAED</color>
     <color name="colorPrimaryDark">#00B6C5</color>
     <color name="colorAccent">#03DAC5</color>
+
+
+    <!--> Minhas cores <-->
     <color name="whiteColor">#ffffff</color>
+
     <color name="blue_btn_color">#00DDE6</color>
+    <color name="colorPrimaryReceita">#00E78F</color>
+    <color name="colorPrimaryDarkReceita">#00FEA6</color>
+    <color name="colorAccentReceita">#02FFA6</color>
+
+    <color name="colorPrimaryDespesa">#FF5B6F</color>
+    <color name="colorPrimaryDarkDespesa">#F25162</color>
+    <color name="colorAccentDespesa">#FF5D6A</color>
+
+
 </resources>

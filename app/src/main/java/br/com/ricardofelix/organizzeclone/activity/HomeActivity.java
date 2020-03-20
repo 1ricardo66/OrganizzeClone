@@ -33,5 +33,14 @@ public class HomeActivity extends AppCompatActivity {
         });*/
     }
 
+    public void addDespesas(View v){
+        startActivity(new Intent(HomeActivity.this,DespesaActivity.class));
+    }
+
+    public void addReceitas(View v){
+        startActivity(new Intent(HomeActivity.this,ReceitaActivity.class));
+
+    }
+
 
 }
