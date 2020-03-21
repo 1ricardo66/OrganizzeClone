@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -31,6 +32,13 @@ public class HomeActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
+
+    ActionBar action = getSupportActionBar();
+        assert action != null;
+        action.setElevation(0);
+    action.hide();
+
+
     }
 
     public void addDespesas(View v){

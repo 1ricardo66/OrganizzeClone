@@ -17,6 +17,8 @@
         android:hint="R$ 00,00"
         android:textSize="25dp"
         android:textAlignment="textEnd"
+        android:textColor="@color/darkGray"
+        android:textColorHint="@color/darkGray"
         android:paddingRight="15dp"
         android:background="@color/colorPrimaryDespesa"
 
@@ -31,14 +33,14 @@
         android:layout_marginLeft="20dp"/>
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/editDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text=""
+        android:inputType="date"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+
 
         />
 
@@ -50,24 +52,24 @@
         android:layout_marginLeft="20dp"/>
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/editCategoria"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text=""
+        android:hint="ex: salário"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"/>
 
 
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/editDescricao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:hint="Descrição"
+        android:hint="ex: salário mensal"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"/>
     <LinearLayout

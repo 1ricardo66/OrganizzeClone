@@ -18,4 +18,13 @@
     <color name="colorAccentDespesa">#FF5D6A</color>
 
 
+    <color name="colorPrimaryHome">#00BBDD</color>
+    <color name="colorPrimaryDarkHome">#00A9C4</color>
+    <color name="colorAccentHome">#00CEEF</color>
+
+
+    <color name="darkGray">#AAA4A4</color>
+
+
+
 </resources>
