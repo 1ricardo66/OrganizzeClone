@@ -18,9 +18,10 @@
             android:layout_weight="1"
             />
         <TextView
+            android:id="@+id/textUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Olá, Ricardo !"
+            android:text="Olá Ricardo !"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textAlignment="center"
@@ -59,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="Sexta-feira, 20 março de 2020"
+            android:text="Sábado, 21 março de 2020"
             android:textStyle="bold"
             android:textSize="18sp"
             />

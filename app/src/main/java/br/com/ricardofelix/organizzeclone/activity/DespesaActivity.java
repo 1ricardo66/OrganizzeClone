@@ -14,6 +14,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import br.com.ricardofelix.organizzeclone.Helper.DateCustom;
 import br.com.ricardofelix.organizzeclone.R;
 
 public class DespesaActivity extends AppCompatActivity {
@@ -36,10 +37,8 @@ public class DespesaActivity extends AppCompatActivity {
             }
         });
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date();
-        String dateNow = sdf.format(date);
-        textDate.setHint("Ex: "+dateNow);
+
+        textDate.setHint("Ex: "+ DateCustom.getDate());
 
         if(textDate != null){
             Toast.makeText(this, "Different null", Toast.LENGTH_SHORT).show();

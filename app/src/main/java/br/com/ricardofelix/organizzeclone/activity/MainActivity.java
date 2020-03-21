@@ -1,6 +1,7 @@
 package br.com.ricardofelix.organizzeclone.activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -77,6 +78,7 @@ public class MainActivity extends IntroActivity {
 
     public void userLogged(){
         auth = ConfigFirebase.getAuth();
+        //auth.signOut();
         if (auth.getCurrentUser() != null){
             finish();
             startActivity(new Intent(this,HomeActivity.class));
@@ -86,6 +88,8 @@ public class MainActivity extends IntroActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        Log.d("USER-MAIN","EXECUTOUUUUUUUU");
+
         userLogged();
     }
 }

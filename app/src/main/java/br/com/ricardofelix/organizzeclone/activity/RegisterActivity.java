@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
+import br.com.ricardofelix.organizzeclone.Helper.Base64Custom;
 import br.com.ricardofelix.organizzeclone.R;
 import br.com.ricardofelix.organizzeclone.config.ConfigFirebase;
 import br.com.ricardofelix.organizzeclone.model.Usuario;
@@ -51,7 +53,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public boolean dataValidation (){
-        String email,pwd;
+        String email,pwd,name;
+        name = textName.getText().toString();
         email =textEmail.getText().toString();
         pwd = textPassword.getText().toString();
 
@@ -62,6 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
             usuario = new Usuario();
             usuario.setEmail(textEmail.getText().toString());
             usuario.setPassword(textPassword.getText().toString());
+            usuario.setNome(name);
             return true;
         }
     }
@@ -77,6 +81,13 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                      if(task.isSuccessful()){
+
+                         String idUser = Base64Custom.codeToBase64( usuario.getEmail() );
+                         usuario.setIdUser(idUser);
+                         usuario.setNome(textName.getText().toString());
+                         usuario.saveUserData();
+
+
                          finish();
                      }else{
                          String exception = "";

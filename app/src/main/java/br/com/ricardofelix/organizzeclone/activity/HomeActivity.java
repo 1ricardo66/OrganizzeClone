@@ -5,18 +5,29 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.os.PersistableBundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import br.com.ricardofelix.organizzeclone.R;
+import br.com.ricardofelix.organizzeclone.config.ConfigFirebase;
 
 public class HomeActivity extends AppCompatActivity {
+    private FirebaseAuth auth;
+    private TextView textUserName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +35,7 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        textUserName = findViewById(R.id.textUserName);
 /*        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,13 +45,11 @@ public class HomeActivity extends AppCompatActivity {
             }
         });*/
 
-    ActionBar action = getSupportActionBar();
-        assert action != null;
-        action.setElevation(0);
-    action.hide();
+    getSupportActionBar().hide();
 
 
     }
+
 
     public void addDespesas(View v){
         startActivity(new Intent(HomeActivity.this,DespesaActivity.class));
