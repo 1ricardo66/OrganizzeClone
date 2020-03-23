@@ -1,21 +1,16 @@
 package br.com.ricardofelix.organizzeclone.activity;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
 
-import br.com.ricardofelix.organizzeclone.Helper.Base64Custom;
 import br.com.ricardofelix.organizzeclone.Helper.DateCustom;
 import br.com.ricardofelix.organizzeclone.R;
-import br.com.ricardofelix.organizzeclone.config.ConfigFirebase;
 import br.com.ricardofelix.organizzeclone.model.UserMovementation;
 
 public class DespesaActivity extends AppCompatActivity {
@@ -47,11 +42,8 @@ public class DespesaActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth auth = ConfigFirebase.getAuth();
                 saveExpenses();
-
-                //Toast.makeText(DespesaActivity.this, Base64Custom.codeToBase64(auth.getCurrentUser().getEmail().toString()), Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(DespesaActivity.this, "Despesa salva com sucesso!!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -74,8 +66,6 @@ public class DespesaActivity extends AppCompatActivity {
         userMovementation.setType("d");
 
         userMovementation.saveMovementation(textDate.getText().toString());
-
-        Toast.makeText(this, textValue.getText().toString(), Toast.LENGTH_SHORT).show();
 
 
     }

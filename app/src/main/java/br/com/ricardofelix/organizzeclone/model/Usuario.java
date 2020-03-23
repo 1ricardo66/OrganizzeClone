@@ -42,8 +42,6 @@ public class Usuario {
                 .child(this.idUser)
                 .setValue( this );
 
-        System.out.println("EXECUTOUUU\nEXECUTOUUUUUUU");
-        Log.d("USER-DATA","EXECUTOUUUUUUUU");
     }
 
 

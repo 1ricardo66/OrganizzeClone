@@ -1,15 +1,11 @@
 package br.com.ricardofelix.organizzeclone.model;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
-import java.util.Objects;
 
 import br.com.ricardofelix.organizzeclone.Helper.Base64Custom;
+import br.com.ricardofelix.organizzeclone.Helper.DateCustom;
 import br.com.ricardofelix.organizzeclone.config.ConfigFirebase;
 
 public class UserMovementation {
@@ -22,10 +18,6 @@ public class UserMovementation {
 
     public void saveMovementation(String date){
 
-        String [] resumDate  = date.split("/");
-
-
-
         FirebaseAuth auth = ConfigFirebase.getAuth();
         String userId = auth.getCurrentUser().getEmail();
         String userId64 = Base64Custom.codeToBase64(userId);
@@ -35,7 +27,7 @@ public class UserMovementation {
         assert userId != null;
         dataRef.child("movimentacao")
                 .child(userId64)
-                .child(resumDate[1]+""+resumDate[2])
+                .child(DateCustom.splitDate(date))
                 .push()
                 .setValue(this);
 
