@@ -1,41 +1,37 @@
 package br.com.ricardofelix.organizzeclone.activity;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
-import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import br.com.ricardofelix.organizzeclone.Helper.Base64Custom;
 import br.com.ricardofelix.organizzeclone.Helper.DateCustom;
 import br.com.ricardofelix.organizzeclone.R;
+import br.com.ricardofelix.organizzeclone.config.ConfigFirebase;
+import br.com.ricardofelix.organizzeclone.model.UserMovementation;
 
 public class DespesaActivity extends AppCompatActivity {
-     private EditText textDate, textDescricao,textCategoria;
+     private EditText textDate, textDescription,textCategory,textValue;
+     private UserMovementation userMovementation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_despesa);
-
+        textValue = findViewById(R.id.textValue);
         textDate = findViewById(R.id.editDate);
-        textDescricao = findViewById(R.id.editDescricao);
-        textCategoria = findViewById(R.id.editCategoria);
+        textDescription = findViewById(R.id.editDescricao);
+        textCategory = findViewById(R.id.editCategoria);
 
 
-        FloatingActionButton fab = findViewById(R.id.okBtn);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(DespesaActivity.this, "FAB SAY HELLO BUDDY!!", Toast.LENGTH_SHORT).show();
-            }
-        });
 
 
         textDate.setHint("Ex: "+ DateCustom.getDate());
@@ -45,6 +41,42 @@ public class DespesaActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this, "IT's NULL", Toast.LENGTH_SHORT).show();
         }
+
+
+        FloatingActionButton fab = findViewById(R.id.okBtn);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth auth = ConfigFirebase.getAuth();
+                saveExpenses();
+
+                //Toast.makeText(DespesaActivity.this, Base64Custom.codeToBase64(auth.getCurrentUser().getEmail().toString()), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+    }
+
+    public void saveExpenses(){
+
+        userMovementation = new UserMovementation();
+        Double d = Double.parseDouble(textValue.getText().toString());
+
+        userMovementation.setValue(d);
+
+        userMovementation.setCategory(textCategory.getText().toString());
+
+        userMovementation.setDescription(textDescription.getText().toString());
+
+        userMovementation.setDate(textDate.getText().toString());
+
+        userMovementation.setType("d");
+
+        userMovementation.saveMovementation(textDate.getText().toString());
+
+        Toast.makeText(this, textValue.getText().toString(), Toast.LENGTH_SHORT).show();
+
 
     }
 }
