@@ -9,7 +9,7 @@
     >
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editValueRevenue"
         android:layout_width="match_parent"
         android:layout_height="131dp"
         android:ems="10"
@@ -34,7 +34,7 @@
         android:layout_marginLeft="20dp"/>
 
     <EditText
-        android:id="@+id/editDate"
+        android:id="@+id/editDateRevenue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -53,7 +53,7 @@
         android:layout_marginLeft="20dp"/>
 
     <EditText
-        android:id="@+id/editCategoria"
+        android:id="@+id/editCategoryRevenue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -65,7 +65,7 @@
 
 
     <EditText
-        android:id="@+id/editDescricao"
+        android:id="@+id/editDescriptionRevenue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -84,6 +84,6 @@
         android:layout_gravity="center|bottom"
         android:src="@drawable/ic_check"
         app:fab_colorNormal="@color/colorPrimaryReceita"
-        android:id="@+id/okBtn"
+        android:id="@+id/okBtnRevenue"
         android:layout_weight="0"/>
 </LinearLayout>

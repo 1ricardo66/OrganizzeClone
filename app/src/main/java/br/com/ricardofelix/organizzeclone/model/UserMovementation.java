@@ -33,6 +33,7 @@ public class UserMovementation {
 
     }
 
+
     public String getDate() {
         return date;
     }

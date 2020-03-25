@@ -38,10 +38,7 @@ public class DespesaActivity extends AppCompatActivity {
         textDate = findViewById(R.id.editDate);
         textDescription = findViewById(R.id.editDescricao);
         textCategory = findViewById(R.id.editCategoria);
-
-
-
-        textDate.setHint("Ex: "+ DateCustom.getDate());
+        textDate.setText(DateCustom.getDate());
 
         getTotalExpenditure();
 
@@ -89,7 +86,7 @@ public class DespesaActivity extends AppCompatActivity {
 
         userMovementation = new UserMovementation();
         Double d = Double.parseDouble(textValue.getText().toString().replace(",","."));
-
+        String type = "d";
         userMovementation.setValue(d);
 
         userMovementation.setCategory(textCategory.getText().toString());
@@ -98,9 +95,10 @@ public class DespesaActivity extends AppCompatActivity {
 
         userMovementation.setDate(textDate.getText().toString());
 
-        userMovementation.setType("d");
+        userMovementation.setType(type);
 
         recoveredValue = d;
+
         updatedExpense =  totalExpenditure + recoveredValue;
 
         setCurrentExpense(updatedExpense);

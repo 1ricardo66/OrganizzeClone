@@ -6,6 +6,10 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,12 +26,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import br.com.ricardofelix.organizzeclone.Helper.Base64Custom;
 import br.com.ricardofelix.organizzeclone.R;
 import br.com.ricardofelix.organizzeclone.config.ConfigFirebase;
+import br.com.ricardofelix.organizzeclone.model.Usuario;
 
 public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private TextView textUserName;
+    private String userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +53,34 @@ public class HomeActivity extends AppCompatActivity {
         });*/
 
     getSupportActionBar().hide();
-
+    getUserName();
 
     }
 
+
+
+    public void getUserName(){
+        FirebaseAuth auth = ConfigFirebase.getAuth();
+        DatabaseReference dataRef = ConfigFirebase.getFirebaseDatabase();
+        String userId = Base64Custom.codeToBase64(auth.getCurrentUser().getEmail());
+
+        dataRef.child("usuarios").child(userId);
+
+        dataRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Usuario usuario = dataSnapshot.getValue(Usuario.class);
+                userName = usuario.getNome();
+                textUserName.setText(usuario.getNome());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 
     public void addDespesas(View v){
         startActivity(new Intent(HomeActivity.this,DespesaActivity.class));
