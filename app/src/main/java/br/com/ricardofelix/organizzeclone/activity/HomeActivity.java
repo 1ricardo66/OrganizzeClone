@@ -53,34 +53,11 @@ public class HomeActivity extends AppCompatActivity {
         });*/
 
     getSupportActionBar().hide();
-    getUserName();
 
     }
 
 
 
-    public void getUserName(){
-        FirebaseAuth auth = ConfigFirebase.getAuth();
-        DatabaseReference dataRef = ConfigFirebase.getFirebaseDatabase();
-        String userId = Base64Custom.codeToBase64(auth.getCurrentUser().getEmail());
-
-        dataRef.child("usuarios").child(userId);
-
-        dataRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Usuario usuario = dataSnapshot.getValue(Usuario.class);
-                userName = usuario.getNome();
-                textUserName.setText(usuario.getNome());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
 
     public void addDespesas(View v){
         startActivity(new Intent(HomeActivity.this,DespesaActivity.class));
