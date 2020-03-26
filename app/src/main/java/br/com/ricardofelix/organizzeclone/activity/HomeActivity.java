@@ -10,6 +10,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import br.com.ricardofelix.organizzeclone.Helper.Base64Custom;
+import br.com.ricardofelix.organizzeclone.Helper.CalendarCustom;
 import br.com.ricardofelix.organizzeclone.R;
 import br.com.ricardofelix.organizzeclone.config.ConfigFirebase;
 import br.com.ricardofelix.organizzeclone.model.Usuario;
@@ -35,12 +39,20 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private TextView textUserName;
     private String userName;
+    private MaterialCalendarView calendarView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        calendarView = findViewById(R.id.calendarView);
+        configureCalendar();
+
+        //calendarView.setWeekDayLabels(CalendarCustom.getDaysOfWeek());
 
         textUserName = findViewById(R.id.textUserName);
 /*        FloatingActionButton fab = findViewById(R.id.fab);
@@ -58,6 +70,18 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
+
+    public void configureCalendar(){
+        calendarView.setTitleMonths(CalendarCustom.getMounths());
+
+        calendarView.setOnMonthChangedListener(new OnMonthChangedListener() {
+            @Override
+            public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
+                Toast.makeText(HomeActivity.this, "Mês: - "+date.getMonth(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
 
     public void addDespesas(View v){
         startActivity(new Intent(HomeActivity.this,DespesaActivity.class));
