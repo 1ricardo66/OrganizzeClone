@@ -98,5 +98,25 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-   
+    public void logout(){
+        auth = ConfigFirebase.getAuth();
+        auth.signOut();
+        startActivity(new Intent(HomeActivity.this,LoginActivity.class));
+        finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.optionLogout:
+                logout();
+                break;
+
+            default:
+                Toast.makeText(this, "Impossivel se deslogar do App", Toast.LENGTH_SHORT).show();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
