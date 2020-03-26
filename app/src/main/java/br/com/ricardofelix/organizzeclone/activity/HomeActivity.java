@@ -48,7 +48,6 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         calendarView = findViewById(R.id.calendarView);
         configureCalendar();
 
@@ -64,7 +63,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });*/
 
-    getSupportActionBar().hide();
 
     }
 
@@ -92,5 +90,13 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu,menu);
+        return super.onCreateOptionsMenu(menu);
 
+    }
+
+
+   
 }
