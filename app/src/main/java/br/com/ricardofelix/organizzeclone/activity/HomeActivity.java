@@ -68,7 +68,22 @@ public class HomeActivity extends AppCompatActivity {
 
         configureCalendar();
 
-        
+        UserMovementation usr1 = new UserMovementation();
+
+        usr1.setType("d");
+        usr1.setValue(22.5);
+        usr1.setCategory("Compras");
+        usr1.setDate("28/03/20");
+
+        UserMovementation usr2 = new UserMovementation();
+
+        usr2.setType("r");
+        usr2.setValue(2700.90);
+        usr2.setCategory("Salário");
+        usr2.setDate("28/03/20");
+
+        movimentations.add(usr1);
+        movimentations.add(usr2);
 
 
         //Conf Adapter
