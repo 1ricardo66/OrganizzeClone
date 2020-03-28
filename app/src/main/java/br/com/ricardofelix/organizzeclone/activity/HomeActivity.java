@@ -3,8 +3,7 @@ package br.com.ricardofelix.organizzeclone.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,19 +14,19 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.os.PersistableBundle;
+
 import android.view.Menu;
-import android.view.MenuInflater;
+
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.DecimalFormat;
 
 import br.com.ricardofelix.organizzeclone.Helper.Base64Custom;
 import br.com.ricardofelix.organizzeclone.Helper.CalendarCustom;
@@ -37,8 +36,7 @@ import br.com.ricardofelix.organizzeclone.model.Usuario;
 
 public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth auth = ConfigFirebase.getAuth();
-    private DatabaseReference dataRef;
-    private TextView textUserName;
+    private TextView textUserName,textAmount;
     private String userName;
     private MaterialCalendarView calendarView;
     private Double totalExpenditure = 0.0;
@@ -51,15 +49,16 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        calendarView = findViewById(R.id.calendarView);
+        textUserName = findViewById(R.id.textUserName);
+        textAmount = findViewById(R.id.textAmount);
+        getSupportActionBar().setTitle("");
         getUserData();
 
-        calendarView = findViewById(R.id.calendarView);
         configureCalendar();
 
         //calendarView.setWeekDayLabels(CalendarCustom.getDaysOfWeek());
 
-        textUserName = findViewById(R.id.textUserName);
 /*        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,16 +84,18 @@ public class HomeActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 Usuario usuario = dataSnapshot.getValue(Usuario.class);
+                DecimalFormat df = new DecimalFormat("0.00");
+
 
                 userName = usuario.getNome();
                 totalExpenditure = usuario.getDespesaTotal();
                 totalRevenue = usuario.getReceitaTotal();
                 amount = totalRevenue - totalExpenditure;
 
-                /*
-                *   Mostrar dados do usuario com setText.
-                *
-                */
+                textUserName.setText("Olá "+splitUserName(userName)+" !");
+                textAmount.setText("R$ "+df.format(amount));
+
+
 
             }
 
@@ -157,5 +158,11 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public String splitUserName(String name){
+        String []userName = name.split(" ");
+
+        return userName[0];
     }
 }
