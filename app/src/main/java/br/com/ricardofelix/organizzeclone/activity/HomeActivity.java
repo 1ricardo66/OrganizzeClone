@@ -35,6 +35,8 @@ import br.com.ricardofelix.organizzeclone.config.ConfigFirebase;
 import br.com.ricardofelix.organizzeclone.model.Usuario;
 
 public class HomeActivity extends AppCompatActivity {
+    private ValueEventListener userValueEventListener;
+    private DatabaseReference dataRef,userRef;
     private FirebaseAuth auth = ConfigFirebase.getAuth();
     private TextView textUserName,textAmount;
     private String userName;
@@ -53,20 +55,10 @@ public class HomeActivity extends AppCompatActivity {
         textUserName = findViewById(R.id.textUserName);
         textAmount = findViewById(R.id.textAmount);
         getSupportActionBar().setTitle("");
-        getUserData();
 
         configureCalendar();
 
-        //calendarView.setWeekDayLabels(CalendarCustom.getDaysOfWeek());
 
-/*        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
 
 
     }
@@ -74,12 +66,12 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public void getUserData(){
-        DatabaseReference dataRef = ConfigFirebase.getFirebaseDatabase();
+        dataRef = ConfigFirebase.getFirebaseDatabase();
         String userId = Base64Custom.codeToBase64(auth.getCurrentUser().getEmail());
 
-        DatabaseReference userRef = dataRef.child("usuarios").child(userId);
+         userRef = dataRef.child("usuarios").child(userId);
 
-        userRef.addValueEventListener(new ValueEventListener() {
+        userValueEventListener = userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -164,5 +156,19 @@ public class HomeActivity extends AppCompatActivity {
         String []userName = name.split(" ");
 
         return userName[0];
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getUserData();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        userRef.addValueEventListener(userValueEventListener);
     }
 }
