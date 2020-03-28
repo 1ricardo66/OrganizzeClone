@@ -1,0 +1,113 @@
+[33mcommit dd332cb483997cf517b4ff0e58a04ea64b1472f7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Paulo Ricardo <ricardofps66@gmail.com>
+Date:   Sat Mar 28 15:44:21 2020 -0300
+
+    Encerrendo listener da HomeActivity
+
+[33mcommit 17b3a9f7a912647c16e3960edf931a68015a559a[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Paulo Ricardo <ricardofps66@gmail.com>
+Date:   Sat Mar 28 08:06:59 2020 -0300
+
+    Mostrando despesa total para o usuario
+
+[33mcommit 67d543880934537c512b22422d9cdce2a7c8f98b[m
+Author: Paulo Ricardo <ricardofps66@gmail.com>
+Date:   Fri Mar 27 21:56:29 2020 -0300
+
+     Pegando dados de receitas / despesas do firebase
+
+[33mcommit 779012a746d9fb568bf896f53d5ce86de68bc9ca[m
+Author: Paulo Ricardo <ricardofps66@gmail.com>
+Date:   Thu Mar 26 17:23:23 2020 -0300
+
+     Configurando SignOut
+
+[33mcommit a5934af10e6c0fb100f3937da6f6ba2ea4222994[m
+Author: Paulo Ricardo <ricardofps66@gmail.com>
+Date:   Thu Mar 26 17:21:33 2020 -0300
+
+    Pequenas edições na toolbar
+
+[33mcommit e3028b23bdbd5851aeaea09b94781c20375bcb0d[m
+Author: Paulo Ricardo <ricardofps66@gmail.com>
+Date:   Thu Mar 26 14:50:22 2020 -0300
+
+    Configurando Listener do calendario
+
+[33mcommit 5fd395710217d4a180fecb3e396270ccfad03a17[m
+Author: Paulo Ricardo <ricardofps66@gmail.com>
+Date:   Thu Mar 26 14:05:58 2020 -0300
+
+    Adicionando calendario na home
+
+[33mcommit 5046c9c5bb667e9356a296f3871ce1ba8e962688[m
+Author: Paulo Ricardo <ricardofps66@gmail.com>
+Date:   Wed Mar 25 11:36:42 2020 -0300
+
+    Apaganando função de pegar o nome do usuario da HomeActivity
+
+[33mcommit 12c13665a390858e3b6374a51b61ff5965eb4a82[m
+Author: Paulo Ricardo <ricardofps66@gmail.com>
+Date:   Wed Mar 25 11:21:54 2020 -0300
+
+    Setando receita total no firebase
+
+[33mcommit 46df2d3adaea26259f53d8cd595a9be1efe844b4[m
+Author: Paulo Ricardo <ricardofps66@gmail.com>
+Date:   Tue Mar 24 19:15:16 2020 -0300
+
+    Salvando despesa no firebase
+
+[33mcommit 191d12103da9b72d358a423d0173d525e4566c9a[m
+Author: Paulo Ricardo <ricardofps66@gmail.com>
+Date:   Tue Mar 24 18:28:29 2020 -0300
+
+    Inicio de validação de campos de despesa
+
+[33mcommit f784f7712104a87c73b80641e0df94f7dfaa2819[m
+Author: Paulo Ricardo <ricardofps66@gmail.com>
+Date:   Mon Mar 23 20:17:11 2020 -0300
+
+    Refatoração DateCustom.java
+
+[33mcommit 1db23e4b47f0b90e602fa359256d9c7ac06347c5[m
+Author: Paulo Ricardo <ricardofps66@gmail.com>
+Date:   Mon Mar 23 19:39:32 2020 -0300
+
+    Adicionando informações de despesas do usuario no firebase
+
+[33mcommit 91b8ca19037d5c119e15dfa684d91b829356e62a[m
+Author: Paulo Ricardo <ricardofps66@gmail.com>
+Date:   Sat Mar 21 20:47:17 2020 -0300
+
+    Comunicando aplicação com firebase, organizando cadastro de user
+
+[33mcommit e0e0529cea6c1dd073787d8118ef2b15dc5ffd67[m
+Author: Paulo Ricardo <ricardofps66@gmail.com>
+Date:   Fri Mar 20 22:10:58 2020 -0300
+
+    Finalizando layout V1
+
+[33mcommit 92d81f7bf97a6932a5383029b03a58aa299830f1[m
+Author: Paulo Ricardo <ricardofps66@gmail.com>
+Date:   Fri Mar 20 19:49:50 2020 -0300
+
+    Criando layout activity despesa
+
+[33mcommit d6b4eb12cae286863c6ca9a514f8d798e12d1f31[m
+Author: Paulo Ricardo <ricardofps66@gmail.com>
+Date:   Fri Mar 20 14:21:59 2020 -0300
+
+    FloatActionMenu implementado
+
+[33mcommit 402bab24414709586f0713669cf4905ddd0d6925[m
+Author: Paulo Ricardo <ricardofps66@gmail.com>
+Date:   Fri Mar 20 13:40:25 2020 -0300
+
+    Implementando FloatActionMenu
+
+[33mcommit 24cb473e8c22652a3ccd4739d00c75425c643352[m
+Author: Paulo Ricardo <ricardofps66@gmail.com>
+Date:   Thu Mar 19 18:13:49 2020 -0300
+
+    Criando Cadastro & Login

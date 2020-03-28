@@ -16,6 +16,8 @@ import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.view.Menu;
@@ -27,11 +29,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.ricardofelix.organizzeclone.Helper.Base64Custom;
 import br.com.ricardofelix.organizzeclone.Helper.CalendarCustom;
 import br.com.ricardofelix.organizzeclone.R;
 import br.com.ricardofelix.organizzeclone.config.ConfigFirebase;
+import br.com.ricardofelix.organizzeclone.adapter.MovimentationsAdapter;
+import br.com.ricardofelix.organizzeclone.model.UserMovementation;
 import br.com.ricardofelix.organizzeclone.model.Usuario;
 
 public class HomeActivity extends AppCompatActivity {
@@ -41,9 +47,12 @@ public class HomeActivity extends AppCompatActivity {
     private TextView textUserName,textAmount;
     private String userName;
     private MaterialCalendarView calendarView;
+    private RecyclerView recyclerMovimentations;
     private Double totalExpenditure = 0.0;
     private Double totalRevenue = 0.0;
     private Double amount = 0.0;
+    private List<UserMovementation> movimentations = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +63,26 @@ public class HomeActivity extends AppCompatActivity {
         calendarView = findViewById(R.id.calendarView);
         textUserName = findViewById(R.id.textUserName);
         textAmount = findViewById(R.id.textAmount);
+        recyclerMovimentations = findViewById(R.id.recyclerMovimentations);
         getSupportActionBar().setTitle("");
 
         configureCalendar();
 
+        
 
+
+        //Conf Adapter
+        MovimentationsAdapter mvAdapter = new MovimentationsAdapter(movimentations,this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerMovimentations.setLayoutManager(layoutManager);
+        recyclerMovimentations.setHasFixedSize(true);
+        recyclerMovimentations.setAdapter(mvAdapter);
+
+
+    }
+
+
+    public void setAdapter(){
 
 
     }
