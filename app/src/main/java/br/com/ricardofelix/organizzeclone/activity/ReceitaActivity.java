@@ -142,7 +142,7 @@ public class ReceitaActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Usuario usuario = dataSnapshot.getValue(Usuario.class);
-                totalRevenue = usuario.getDespesaTotal();
+                totalRevenue = usuario.getReceitaTotal();
             }
 
             @Override

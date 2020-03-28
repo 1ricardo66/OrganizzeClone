@@ -36,10 +36,14 @@ import br.com.ricardofelix.organizzeclone.config.ConfigFirebase;
 import br.com.ricardofelix.organizzeclone.model.Usuario;
 
 public class HomeActivity extends AppCompatActivity {
-    private FirebaseAuth auth;
+    private FirebaseAuth auth = ConfigFirebase.getAuth();
+    private DatabaseReference dataRef;
     private TextView textUserName;
     private String userName;
     private MaterialCalendarView calendarView;
+    private Double totalExpenditure = 0.0;
+    private Double totalRevenue = 0.0;
+    private Double amount = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,8 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getUserData();
 
         calendarView = findViewById(R.id.calendarView);
         configureCalendar();
@@ -66,6 +72,39 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+
+
+    public void getUserData(){
+        DatabaseReference dataRef = ConfigFirebase.getFirebaseDatabase();
+        String userId = Base64Custom.codeToBase64(auth.getCurrentUser().getEmail());
+
+        DatabaseReference userRef = dataRef.child("usuarios").child(userId);
+
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                Usuario usuario = dataSnapshot.getValue(Usuario.class);
+
+                userName = usuario.getNome();
+                totalExpenditure = usuario.getDespesaTotal();
+                totalRevenue = usuario.getReceitaTotal();
+                amount = totalRevenue - totalExpenditure;
+
+                /*
+                *   Mostrar dados do usuario com setText.
+                *
+                */
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 
 
 
