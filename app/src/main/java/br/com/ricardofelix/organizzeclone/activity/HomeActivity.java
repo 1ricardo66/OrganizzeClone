@@ -34,6 +34,7 @@ import java.util.List;
 
 import br.com.ricardofelix.organizzeclone.Helper.Base64Custom;
 import br.com.ricardofelix.organizzeclone.Helper.CalendarCustom;
+import br.com.ricardofelix.organizzeclone.Helper.ConnectivityChecker;
 import br.com.ricardofelix.organizzeclone.R;
 import br.com.ricardofelix.organizzeclone.config.ConfigFirebase;
 import br.com.ricardofelix.organizzeclone.adapter.MovimentationsAdapter;
@@ -201,7 +202,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         getUserData();
-
+        boolean answer = ConnectivityChecker.getConnectivity(this);
+        Toast.makeText(this, answer+"" , Toast.LENGTH_SHORT).show();
     }
 
     @Override
