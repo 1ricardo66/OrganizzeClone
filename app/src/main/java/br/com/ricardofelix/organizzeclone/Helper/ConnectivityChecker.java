@@ -14,28 +14,11 @@ public class ConnectivityChecker {
     private static Boolean connectivity=true;
 
 
-    public static boolean getConnectivity(final Context c){
+        public static boolean getConnectivity(final Context c){
         ConnectivityManager cm = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
 
-            assert cm != null;
-            cm.registerDefaultNetworkCallback(new ConnectivityManager.NetworkCallback(){
-                @Override
-                public void onLost(@NonNull Network network) {
-                    super.onLost(network);
-                    connectivity = false;
-                    Toast.makeText(c.getApplicationContext(), "API 29", Toast.LENGTH_SHORT).show();
-
-                }
-
-                @Override
-                public void onAvailable(@NonNull Network network) {
-                    super.onAvailable(network);
-                    connectivity = true;
-
-                    Toast.makeText(c.getApplicationContext(), "API 29", Toast.LENGTH_SHORT).show();
-                }
-            });
+            connectivity = isConnected(c);
 
         }else{
             assert cm != null;
@@ -47,5 +30,19 @@ public class ConnectivityChecker {
         }
 
         return connectivity;
+    }
+
+    public static boolean isConnected(Context c){
+        ConnectivityManager conMgr = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+        if (netInfo == null) {
+            connectivity = false;
+            Toast.makeText(c.getApplicationContext(), "Please turn on Internet ", Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(c.getApplicationContext(), "You are connected", Toast.LENGTH_SHORT).show();
+            connectivity = true;
+        }
+        return  connectivity;
     }
 }
