@@ -50,10 +50,12 @@ import br.com.ricardofelix.organizzeclone.model.Usuario;
 public class HomeActivity extends AppCompatActivity {
     private ValueEventListener userValueEventListener;
     private ValueEventListener movimentationsValueEventListener;
-    private DatabaseReference dataRef,userRef,movimentationsRef;
+    private DatabaseReference dataRef = ConfigFirebase.getFirebaseDatabase()
+            ,userRef,movimentationsRef;
     private FirebaseAuth auth = ConfigFirebase.getAuth();
     private TextView textUserName,textAmount;
     private String userName;
+    private MovimentationsAdapter mvAdapter;
     private MaterialCalendarView calendarView;
     private RecyclerView recyclerMovimentations;
     private Double totalExpenditure = 0.0;
@@ -80,7 +82,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
         //Conf Adapter
-        MovimentationsAdapter mvAdapter = new MovimentationsAdapter(movimentations,this);
+        mvAdapter = new MovimentationsAdapter(movimentations,this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerMovimentations.setLayoutManager(layoutManager);
         recyclerMovimentations.setHasFixedSize(true);
@@ -91,27 +93,31 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public void getMovimentation(){
-        auth = ConfigFirebase.getAuth();
-        String userId = Base64Custom.codeToBase64(auth.getCurrentUser().getEmail());
-        dataRef = ConfigFirebase.getFirebaseDatabase();
+        String userEmail = auth.getCurrentUser().getEmail();
+        String idUsuario = Base64Custom.codeToBase64( userEmail );
         movimentationsRef = dataRef.child("movimentacao")
-                .child(userId)
-                .child(selectedMounth);
+                .child( idUsuario )
+                .child( selectedMounth );
 
-        movimentationsValueEventListener = dataRef.addValueEventListener(new ValueEventListener() {
+        movimentationsValueEventListener = movimentationsRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                movimentations.clear();
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for(DataSnapshot data : dataSnapshot.getChildren()){
-                    UserMovementation movimentation = data.getValue(UserMovementation.class);
-                    movimentations.add(movimentation);
-                    Log.d("MOVIMENTATION",movimentation.getCategory()+" - "+movimentation.getValue(),null);
+                movimentations.clear();
+                for (DataSnapshot data: dataSnapshot.getChildren() ){
+
+                    UserMovementation movimentation = data.getValue( UserMovementation.class );
+                    movimentations.add( movimentation );
+
+
                 }
+
+                mvAdapter.notifyDataSetChanged();
+
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
@@ -121,7 +127,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public void getUserData(){
-        dataRef = ConfigFirebase.getFirebaseDatabase();
         String userId = Base64Custom.codeToBase64(auth.getCurrentUser().getEmail());
 
          userRef = dataRef.child("usuarios").child(userId);
@@ -160,13 +165,17 @@ public class HomeActivity extends AppCompatActivity {
         calendarView.setTitleMonths(CalendarCustom.getMounths());
 
         CalendarDay currentDate = calendarView.getCurrentDate();
-        selectedMounth = currentDate.getMonth()+""+currentDate.getYear();
+        String mounth = String.format("%02d",currentDate.getMonth());
+        selectedMounth = mounth+""+currentDate.getYear();
 
         calendarView.setOnMonthChangedListener(new OnMonthChangedListener() {
             @Override
             public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
                 Toast.makeText(HomeActivity.this, "Mês: - "+date.getMonth(), Toast.LENGTH_SHORT).show();
-                selectedMounth = date.getMonth()+""+date.getYear();
+                String mounth = String.format("%02d",date.getMonth());
+                selectedMounth = mounth+""+date.getYear();
+                getMovimentation();
+
             }
         });
 
