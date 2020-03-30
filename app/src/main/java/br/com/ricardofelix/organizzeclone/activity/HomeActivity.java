@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.util.Log;
 import android.view.Menu;
 
 import android.view.MenuItem;
@@ -48,7 +49,8 @@ import br.com.ricardofelix.organizzeclone.model.Usuario;
 
 public class HomeActivity extends AppCompatActivity {
     private ValueEventListener userValueEventListener;
-    private DatabaseReference dataRef,userRef;
+    private ValueEventListener movimentationsValueEventListener;
+    private DatabaseReference dataRef,userRef,movimentationsRef;
     private FirebaseAuth auth = ConfigFirebase.getAuth();
     private TextView textUserName,textAmount;
     private String userName;
@@ -58,6 +60,7 @@ public class HomeActivity extends AppCompatActivity {
     private Double totalRevenue = 0.0;
     private Double amount = 0.0;
     private List<UserMovementation> movimentations = new ArrayList<>();
+    private String selectedMounth;
 
 
     @Override
@@ -74,22 +77,6 @@ public class HomeActivity extends AppCompatActivity {
 
         configureCalendar();
 
-        UserMovementation usr1 = new UserMovementation();
-
-        usr1.setType("d");
-        usr1.setValue(22.5);
-        usr1.setCategory("Compras");
-        usr1.setDate("28/03/20");
-
-        UserMovementation usr2 = new UserMovementation();
-
-        usr2.setType("r");
-        usr2.setValue(2700.90);
-        usr2.setCategory("Salário");
-        usr2.setDate("28/03/20");
-
-        movimentations.add(usr1);
-        movimentations.add(usr2);
 
 
         //Conf Adapter
@@ -103,8 +90,31 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-    public void setAdapter(){
+    public void getMovimentation(){
+        auth = ConfigFirebase.getAuth();
+        String userId = Base64Custom.codeToBase64(auth.getCurrentUser().getEmail());
+        dataRef = ConfigFirebase.getFirebaseDatabase();
+        movimentationsRef = dataRef.child("movimentacao")
+                .child(userId)
+                .child(selectedMounth);
 
+        movimentationsValueEventListener = dataRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                movimentations.clear();
+
+                for(DataSnapshot data : dataSnapshot.getChildren()){
+                    UserMovementation movimentation = data.getValue(UserMovementation.class);
+                    movimentations.add(movimentation);
+                    Log.d("MOVIMENTATION",movimentation.getCategory()+" - "+movimentation.getValue(),null);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
@@ -149,10 +159,14 @@ public class HomeActivity extends AppCompatActivity {
     public void configureCalendar(){
         calendarView.setTitleMonths(CalendarCustom.getMounths());
 
+        CalendarDay currentDate = calendarView.getCurrentDate();
+        selectedMounth = currentDate.getMonth()+""+currentDate.getYear();
+
         calendarView.setOnMonthChangedListener(new OnMonthChangedListener() {
             @Override
             public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
                 Toast.makeText(HomeActivity.this, "Mês: - "+date.getMonth(), Toast.LENGTH_SHORT).show();
+                selectedMounth = date.getMonth()+""+date.getYear();
             }
         });
 
@@ -206,9 +220,10 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        getUserData();
-        
         ConnectivityChecker.isConnected(this);
+        getUserData();
+        getMovimentation();
+
     }
 
     @Override
@@ -216,5 +231,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onStop();
 
         userRef.addValueEventListener(userValueEventListener);
+        movimentationsRef.addValueEventListener(movimentationsValueEventListener);
     }
 }
