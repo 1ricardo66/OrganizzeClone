@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import br.com.ricardofelix.organizzeclone.Helper.Base64Custom;
+import br.com.ricardofelix.organizzeclone.Helper.ConnectivityChecker;
 import br.com.ricardofelix.organizzeclone.Helper.DateCustom;
 import br.com.ricardofelix.organizzeclone.R;
 import br.com.ricardofelix.organizzeclone.config.ConfigFirebase;
@@ -51,7 +52,13 @@ public class ReceitaActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(fieldsValidation()){
-                    saveRevenue();
+
+                    if(ConnectivityChecker.isConnected(getApplicationContext())){
+
+                        saveRevenue();
+                    }else{
+                        Toast.makeText(ReceitaActivity.this, "Receita não salva\n Sem acesso a rede.", Toast.LENGTH_SHORT).show();
+                    }
                 }else{
                     Toast.makeText(ReceitaActivity.this, "Por favor, preencha todos os campos!", Toast.LENGTH_SHORT).show();
                 }

@@ -201,8 +201,8 @@ public class HomeActivity extends AppCompatActivity {
     public void logout(){
         auth = ConfigFirebase.getAuth();
         auth.signOut();
-        startActivity(new Intent(HomeActivity.this,LoginActivity.class));
         finish();
+        startActivity(new Intent(HomeActivity.this,LoginActivity.class));
     }
 
     @Override

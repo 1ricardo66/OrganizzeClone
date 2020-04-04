@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import br.com.ricardofelix.organizzeclone.Helper.Base64Custom;
+import br.com.ricardofelix.organizzeclone.Helper.ConnectivityChecker;
 import br.com.ricardofelix.organizzeclone.Helper.DateCustom;
 import br.com.ricardofelix.organizzeclone.R;
 import br.com.ricardofelix.organizzeclone.config.ConfigFirebase;
@@ -48,8 +49,15 @@ public class DespesaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(textValidation()){
-                    saveExpenses();
-                    Toast.makeText(DespesaActivity.this, "Despesa salva com sucesso!!", Toast.LENGTH_SHORT).show();
+
+                    if(ConnectivityChecker.isConnected(getApplicationContext())){
+
+                        saveExpenses();
+                        Toast.makeText(DespesaActivity.this, "Despesa salva com sucesso!!", Toast.LENGTH_SHORT).show();
+
+                    }else{
+                        Toast.makeText(DespesaActivity.this, "Receita não salva\n Sem acesso a rede.", Toast.LENGTH_SHORT).show();
+                    }
                 }else{
                     Toast.makeText(DespesaActivity.this, "Preencha todos os campos para salvar uma despesa.", Toast.LENGTH_SHORT).show();
 
